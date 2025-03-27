@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bi6ji0oeiiosp"]
+[gd_scene load_steps=42 format=3 uid="uid://bi6ji0oeiiosp"]
 
 [ext_resource type="Script" uid="uid://hydom3pwl52b" path="res://Escenas/componentes/Jugador/jugador.gd" id="1_vv1yo"]
 [ext_resource type="Texture2D" uid="uid://bx3p55rwlym8l" path="res://Assets/Texturas/Jugador/attack.png" id="2_sombp"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://d3j0bw2ubxmr" path="res://Assets/Texturas/Jugador/idle.png" id="5_bx2cf"]
 [ext_resource type="Script" uid="uid://bh5gdba7ghckq" path="res://Escenas/componentes/Maquina_Estado/maquina_estado.gd" id="6_q7o24"]
 [ext_resource type="Script" uid="uid://dchof4n7wva0b" path="res://Escenas/componentes/Jugador/Estados/Quieto.gd" id="7_6g2t3"]
+[ext_resource type="Script" uid="uid://bga0j66w40d30" path="res://Escenas/componentes/Jugador/Estados/cayendo.gd" id="8_bx2cf"]
+[ext_resource type="Script" uid="uid://bm3e322m4e6t2" path="res://Escenas/componentes/Jugador/Estados/saltando.gd" id="9_uvgch"]
+[ext_resource type="Script" uid="uid://11w5t3dl5gb6" path="res://Escenas/componentes/Jugador/Estados/velocidad.gd" id="10_ov37r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vv1yo"]
 size = Vector2(18, 49)
@@ -143,7 +146,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_eri4y")
 }],
 "loop": false,
-"name": &"atacar",
+"name": &"Atacar",
 "speed": 5.0
 }, {
 "frames": [{
@@ -160,7 +163,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_x8l47")
 }],
 "loop": false,
-"name": &"caer",
+"name": &"Caer",
 "speed": 10.0
 }, {
 "frames": [{
@@ -174,7 +177,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_5kx8c")
 }],
 "loop": true,
-"name": &"cayendo",
+"name": &"Cayendo",
 "speed": 5.0
 }, {
 "frames": [{
@@ -203,7 +206,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_6dh5s")
 }],
 "loop": true,
-"name": &"correr",
+"name": &"Correr",
 "speed": 5.0
 }, {
 "frames": [{
@@ -220,7 +223,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_a3wl1")
 }],
 "loop": true,
-"name": &"quieto",
+"name": &"Quieto",
 "speed": 3.0
 }, {
 "frames": [{
@@ -243,13 +246,14 @@ animations = [{
 "texture": SubResource("AtlasTexture_7psi1")
 }],
 "loop": false,
-"name": &"saltar",
+"name": &"Saltar",
 "speed": 10.0
 }]
 
-[node name="Jugador" type="CharacterBody2D"]
-position = Vector2(575, 69)
+[node name="Jugador" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+position = Vector2(562, 128)
 script = ExtResource("1_vv1yo")
+sprite = NodePath("AnimatedSprite2D")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -258,13 +262,25 @@ shape = SubResource("RectangleShape2D_vv1yo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vl2d8")
-animation = &"quieto"
+animation = &"Saltar"
 
 [node name="MaquinaEstado" type="Node" parent="." node_paths=PackedStringArray("jugador")]
 script = ExtResource("6_q7o24")
 jugador = NodePath("..")
 metadata/_custom_type_script = "uid://bh5gdba7ghckq"
 
-[node name="Estado" type="Node" parent="MaquinaEstado"]
+[node name="Quieto" type="Node" parent="MaquinaEstado"]
 script = ExtResource("7_6g2t3")
+metadata/_custom_type_script = "uid://dpklkvqyfi3ku"
+
+[node name="Cayendo" type="Node" parent="MaquinaEstado"]
+script = ExtResource("8_bx2cf")
+metadata/_custom_type_script = "uid://dpklkvqyfi3ku"
+
+[node name="Saltando" type="Node" parent="MaquinaEstado"]
+script = ExtResource("9_uvgch")
+metadata/_custom_type_script = "uid://dpklkvqyfi3ku"
+
+[node name="Velocidad" type="Node" parent="MaquinaEstado"]
+script = ExtResource("10_ov37r")
 metadata/_custom_type_script = "uid://dpklkvqyfi3ku"
