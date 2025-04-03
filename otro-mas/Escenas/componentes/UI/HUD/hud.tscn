@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctt7rhow5k2hq"]
+
+[ext_resource type="Texture2D" uid="uid://comaa0ub3jt22" path="res://Assets/icon.svg" id="1_3352j"]
+[ext_resource type="Script" uid="uid://cty5tpw3e6rc1" path="res://Escenas/componentes/UI/HUD/hud.gd" id="1_ap81e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bxnci"]
+bg_color = Color(0, 0.62142, 0.295417, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3352j"]
+bg_color = Color(0, 0.548991, 0.825458, 1)
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ap81e")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Barras de vida" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="Vida" type="HBoxContainer" parent="MarginContainer/Barras de vida"]
+custom_minimum_size = Vector2(256, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/Barras de vida/Vida"]
+custom_minimum_size = Vector2(256, 32)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_bxnci")
+value = 60.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/Barras de vida/Vida"]
+layout_mode = 2
+text = "100"
+
+[node name="Magia" type="HBoxContainer" parent="MarginContainer/Barras de vida"]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/Barras de vida/Magia"]
+custom_minimum_size = Vector2(256, 32)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_3352j")
+value = 20.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/Barras de vida/Magia"]
+layout_mode = 2
+text = "100
+"
+
+[node name="Monedas" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Monedas"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("1_3352j")
+expand_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/Monedas"]
+layout_mode = 2
+text = "60"
